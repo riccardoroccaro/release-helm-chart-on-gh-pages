@@ -64,7 +64,7 @@ helm repo index ./charts --url $repo_url
 ls -l
 
 # Copy the helm_dest_temp_dir folder content to the repo_dir
-cp $helm_dest_temp_dir/* $repo_dir
+cp -r $helm_dest_temp_dir/* $repo_dir
 cd $repo_dir
 
 # Commit and push the changes
