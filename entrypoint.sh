@@ -32,7 +32,7 @@ echo "...."
 
 # Check dest_branch existence
 check_dest_branch=$(git branch --list ${dest_branch})
-[ -z "$check_dest_branch" ] && echo "dest_branch: $dest_branch, doesn't exist." && exit 1
+#[ -z "$check_dest_branch" ] && echo "dest_branch: $dest_branch, doesn't exist." && exit 1
 
 # Congfigure git
 git config user.name "$GITHUB_ACTOR"
