@@ -1,5 +1,6 @@
 #!/bin/sh
 
+##################################
 echo "...."
 pwd
 echo "...."
@@ -7,13 +8,21 @@ ls -l
 echo "...."
 git branch -r --list
 echo "...."
-git branch -r --list
+git branch --list
 echo "...."
+##################################
 
 # Set vars
 src_folder=$1
 dest_branch=$2
 git_token=$3
+
+##################################
+git branch --list ${dest_branch}
+echo "...."
+git branch -r --list ${dest_branch}
+echo "...."
+##################################
 
 # If repo_url has not been set it will be set to 'https://<owner>.github.com/<repo>'
 [ -z "$4" ] && repo_url="https://$(echo $GITHUB_REPOSITORY | cut -d '/' -f 1).github.com/$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" || repo_url=$4
