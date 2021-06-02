@@ -5,7 +5,7 @@ pwd
 echo "...."
 ls -l
 echo "...."
-git branch --list
+git branch -r --list
 echo "...."
 
 # Set vars
