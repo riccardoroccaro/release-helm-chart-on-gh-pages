@@ -16,4 +16,4 @@ COPY entrypoint.sh /entrypoint.sh
 # Make entrypoint.sh executable
 RUN chmod +x ./entrypoint.sh
 
-ENTRYPOINT [ "entrypoint.sh" ]
+ENTRYPOINT [ "./entrypoint.sh" ]
