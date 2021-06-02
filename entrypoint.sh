@@ -1,5 +1,13 @@
 #!/bin/sh
 
+echo "...."
+pwd
+echo "...."
+ls -l
+echo "...."
+git branch --list
+echo "...."
+
 # Set vars
 src_folder=$1
 dest_branch=$2
