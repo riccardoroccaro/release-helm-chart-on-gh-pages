@@ -59,7 +59,9 @@ helm package .
 mkdir $helm_dest_temp_dir/charts
 mv *.tgz $helm_dest_temp_dir/charts/
 cd $helm_dest_temp_dir
+ls -l
 helm repo index ./charts --url $repo_url
+ls -l
 
 # Copy the helm_dest_temp_dir folder content to the repo_dir
 cp $helm_dest_temp_dir/* $repo_dir
