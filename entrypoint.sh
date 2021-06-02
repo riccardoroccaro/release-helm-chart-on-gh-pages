@@ -56,6 +56,7 @@ repo_dir=$(pwd)
 
 cd $helm_src_temp_dir
 helm package
+ls -l
 mkdir $helm_dest_temp_dir/charts
 mv *.tgz $helm_dest_temp_dir/charts/
 helm repo index /charts --url $repo_url
