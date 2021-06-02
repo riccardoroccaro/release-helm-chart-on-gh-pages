@@ -55,11 +55,11 @@ cp -r ./* $helm_dest_temp_dir
 repo_dir=$(pwd)
 
 cd $helm_src_temp_dir
-helm package
-ls -l
+helm package .
 mkdir $helm_dest_temp_dir/charts
 mv *.tgz $helm_dest_temp_dir/charts/
-helm repo index /charts --url $repo_url
+cd $helm_dest_temp_dir
+helm repo index ./charts --url $repo_url
 
 # Copy the helm_dest_temp_dir folder content to the repo_dir
 cp $helm_dest_temp_dir/* $repo_dir
