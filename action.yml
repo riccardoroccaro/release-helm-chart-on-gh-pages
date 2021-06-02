@@ -1,0 +1,25 @@
+name: 'release-helm-chart-on-gh-pages'
+description: 'Release Helm Chart on GitHub Pages'
+inputs:
+  src-folder:
+    description: 'The helm chart source folder'
+    required: true
+    default: 'helm'
+  dest-branch:
+    description: 'The name of the branch used for GitHub Pages'
+    required: true
+    default: 'gh-pages'
+  git-token:
+    description: 'The GitHub token used to access the repository and push the commit'
+    required: true
+  repo-url:
+    description: 'The repository URL'
+    required: false
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.src-folder }}
+    - ${{ inputs.dest-branch }}
+    - ${{ inputs.git-token }}
+    - ${{ inputs.repo-url }}
