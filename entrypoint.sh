@@ -7,6 +7,8 @@ ls -l
 echo "...."
 git branch -r --list
 echo "...."
+git branch -r --list
+echo "...."
 
 # Set vars
 src_folder=$1
