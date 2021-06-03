@@ -21,5 +21,4 @@ runs:
   args:
     - ${{ inputs.src-folder }}
     - ${{ inputs.dest-branch }}
-    - ${{ inputs.git-token }}
     - ${{ inputs.repo-url }}
