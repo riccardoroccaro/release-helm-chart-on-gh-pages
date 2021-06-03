@@ -48,26 +48,29 @@ main(){
     echo "Done."
 
     # Create helm package
-    repo_dir=$(pwd)
-    echo "pwd=$(pwd)"
-    echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
-
+    info "Creating helm package..."
     cd $helm_src_temp_dir
-    echo "after cd GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
     helm package .
     mkdir $helm_dest_temp_dir/$dest_folder
     mv *.tgz $helm_dest_temp_dir/$dest_folder
     cd $helm_dest_temp_dir
     helm repo index ./$dest_folder --url $repo_url
+    echo "Done."
 
-    # Copy the helm_dest_temp_dir folder content to the repo_dir
-    cp -r $helm_dest_temp_dir/* $repo_dir
-    cd $repo_dir
+    # Copy the helm_dest_temp_dir folder content to the GITHUB_WORKSPACE
+    info "Copying the created packages and index in GitHub workspace..."
+    cp -r $helm_dest_temp_dir/* $GITHUB_WORKSPACE
+    cd $GITHUB_WORKSPACE
+    echo "Done."
 
     # Commit and push the changes
+    info "Commit and push..."
     git add --all
     git commit -m "Create repository from commit $(echo ${GITHUB_SHA} | cut -c1-7) in branch $(echo ${GITHUB_REF#refs/heads/} | tr / _)"
     git push
+    echo "Done."
+
+    echo "All done succesfully."
 }
 
 main $@
