@@ -13,7 +13,7 @@ A GitHub action aiming at releasing an helm chart on a user-selected branch conf
 ### Inputs
 - `src-folder`: The folder containing the Chart.yaml file (default: `helm`)
 - `dest-branch`: The name of the branch to store the published charts and configured to be used with GitHub Pages (default: `gh-pages`)
-- `dest-folder`: The folder in <dest-branch> which will contain the packages and the index.yml file (default `.`)
+- `dest-folder`: The folder in `dest-branch` which will contain the packages and the index.yml file (default `.`)
 - `repo-url`: The GitHub Pages URL to the charts repo (default: `https://<owner>.github.io/<project>`)
 
 ### Example Workflow
