@@ -78,8 +78,8 @@ main(){
     info_close "Done."
 
     # Log cat
+    echo "[INFO] Printing log..."
     echo "-------------------------------------------"
-    echo "Printing log..."
     cat $log_file
     echo "-------------------------------------------"
 
