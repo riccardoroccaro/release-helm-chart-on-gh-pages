@@ -33,7 +33,7 @@ cp -r ./* $helm_dest_temp_dir
 
 # Create helm package
 repo_dir=$(pwd)
-echo "pwd=$pwd"
+echo "pwd=$(pwd)"
 echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
 
 cd $helm_src_temp_dir
