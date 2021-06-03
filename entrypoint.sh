@@ -11,11 +11,12 @@ dest_branch=$2
 ! [ -d $src_folder ] && echo "src_folder: $src_folder, doesn't exist." && exit 1
 
 # Check dest_branch existence
-echo "git branch"
-git branch --list origin/${dest_branch}
+echo "git branch -r origin/"
+git branch --list -r origin/${dest_branch}
+echo "git branch -r"
+git branch --list -r ${dest_branch}
 
-
-check_dest_branch=$(git branch --list origin/${dest_branch})
+check_dest_branch=$(git branch --list -r ${dest_branch})
 [ -z "$check_dest_branch" ] && echo "dest_branch: $dest_branch, doesn't exist." && exit 1
 
 # Congfigure git
