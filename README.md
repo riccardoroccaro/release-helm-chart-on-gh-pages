@@ -42,13 +42,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+
       # Create the helm package and publish it on the dest-branch
       - uses: riccardoroccaro/release-helm-chart-on-gh-pages@v1
         with:
           src-folder: "helm" #DO NOT ADD '/' CHAR BEFORE THE FOLDER NAME, just after if needed
           dest-branch: "gh-pages"
-          dest-folder: "."
-          repo-url: riccardoroccaro.github.io/test-helm
+          dest-folder: "." #DO NOT ADD '/' CHAR BEFORE THE FOLDER NAME, just after if needed
+          repo-url: "riccardoroccaro.github.io/test-helm"
 ```
