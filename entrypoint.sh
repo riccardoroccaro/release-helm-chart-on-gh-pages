@@ -33,8 +33,8 @@ main(){
 
     # Congfigure git
     info "Configuring git user..."
-    git config user.name "$GITHUB_ACTOR" > $log_file 2>&1
-    git config user.email "$GITHUB_ACTOR@users.noreply.github.com" > $log_file 2>&1
+    git config user.name "$GITHUB_ACTOR" >> $log_file 2>&1
+    git config user.email "$GITHUB_ACTOR@users.noreply.github.com" >> $log_file 2>&1
     info_close "Done."
 
     # Create temp directory for the helm source
@@ -42,7 +42,7 @@ main(){
     helm_src_temp_dir=$(mktemp -d -t helm_src-XXXXXXXXXX)
 
     # Copy the src_folder content into the temp directory
-    cp -r $src_folder/* $helm_src_temp_dir > $log_file 2>&1
+    cp -r $src_folder/* $helm_src_temp_dir >> $log_file 2>&1
 
     # Create temp directory for helm dest
     helm_dest_temp_dir=$(mktemp -d -t helm_src-XXXXXXXXXX)
@@ -50,31 +50,31 @@ main(){
 
     # Checkout to dest_branch and copy its content into the temp directory
     info "Checking out to $dest_branch branch and copy its content on corresponding temp dir..."
-    git checkout $dest_branch > $log_file 2>&1
-    cp -r ./* $helm_dest_temp_dir > $log_file 2>&1
+    git checkout $dest_branch >> $log_file 2>&1
+    cp -r ./* $helm_dest_temp_dir >> $log_file 2>&1
     info_close "Done."
 
     # Create helm package
     info "Creating helm package..."
     cd $helm_src_temp_dir
-    helm package . > $log_file 2>&1
-    mkdir $helm_dest_temp_dir/$dest_folder > $log_file 2>&1
-    mv *.tgz $helm_dest_temp_dir/$dest_folder > $log_file 2>&1
-    cd $helm_dest_temp_dir > $log_file 2>&1
-    helm repo index ./$dest_folder --url $repo_url > $log_file 2>&1
+    helm package . >> $log_file 2>&1
+    mkdir $helm_dest_temp_dir/$dest_folder >> $log_file 2>&1
+    mv *.tgz $helm_dest_temp_dir/$dest_folder >> $log_file 2>&1
+    cd $helm_dest_temp_dir >> $log_file 2>&1
+    helm repo index ./$dest_folder --url $repo_url >> $log_file 2>&1
     info_close "Done."
 
     # Copy the helm_dest_temp_dir folder content to the GITHUB_WORKSPACE
     info "Copying the created packages and index in GitHub workspace..."
-    cp -r $helm_dest_temp_dir/* $GITHUB_WORKSPACE > $log_file 2>&1
-    cd $GITHUB_WORKSPACE > $log_file 2>&1
+    cp -r $helm_dest_temp_dir/* $GITHUB_WORKSPACE >> $log_file 2>&1
+    cd $GITHUB_WORKSPACE >> $log_file 2>&1
     info_close "Done."
 
     # Commit and push the changes
     info "Commit and push..."
-    git add --all > $log_file 2>&1
-    git commit -m "Create repository from commit $(echo ${GITHUB_SHA} | cut -c1-7) in branch $(echo ${GITHUB_REF#refs/heads/} | tr / _)" > $log_file 2>&1
-    git push > $log_file 2>&1
+    git add --all >> $log_file 2>&1
+    git commit -m "Create repository from commit $(echo ${GITHUB_SHA} | cut -c1-7) in branch $(echo ${GITHUB_REF#refs/heads/} | tr / _)" >> $log_file 2>&1
+    git push >> $log_file 2>&1
     info_close "Done."
 
     # Log cat
