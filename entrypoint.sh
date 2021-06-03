@@ -1,29 +1,5 @@
 #!/bin/sh
 
-##################################
-echo "...."
-pwd
-echo "...."
-ls -l
-echo "...."
-git branch -r --list
-echo "...."
-git branch --list
-echo "...."
-##################################
-
-# Set vars
-src_folder=$1
-dest_branch=$2
-git_token=$3
-
-##################################
-git branch --list ${dest_branch}
-echo "...."
-git branch -r --list ${dest_branch}
-echo "...."
-##################################
-
 # If repo_url has not been set it will be set to 'https://<owner>.github.com/<repo>'
 [ -z "$4" ] && repo_url="https://$(echo $GITHUB_REPOSITORY | cut -d '/' -f 1).github.com/$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" || repo_url=$4
 
@@ -31,8 +7,8 @@ echo "...."
 ! [ -d $src_folder ] && echo "src_folder: $src_folder, doesn't exist." && exit 1
 
 # Check dest_branch existence
-check_dest_branch=$(git branch --list ${dest_branch})
-#[ -z "$check_dest_branch" ] && echo "dest_branch: $dest_branch, doesn't exist." && exit 1
+check_dest_branch=$(git branch --list origin/${dest_branch})
+[ -z "$check_dest_branch" ] && echo "dest_branch: $dest_branch, doesn't exist." && exit 1
 
 # Congfigure git
 git config user.name "$GITHUB_ACTOR"
@@ -53,8 +29,11 @@ cp -r ./* $helm_dest_temp_dir
 
 # Create helm package
 repo_dir=$(pwd)
+echo "pwd=$pwd"
+echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
 
 cd $helm_src_temp_dir
+echo "after cd GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
 helm package .
 mkdir $helm_dest_temp_dir/charts
 mv *.tgz $helm_dest_temp_dir/charts/
