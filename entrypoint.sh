@@ -11,12 +11,7 @@ dest_branch=$2
 ! [ -d $src_folder ] && echo "src_folder: $src_folder, doesn't exist." && exit 1
 
 # Check dest_branch existence
-echo "git branch -r origin/"
-git branch --list -r origin/${dest_branch}
-echo "git branch -r"
-git branch --list -r ${dest_branch}
-
-check_dest_branch=$(git branch --list -r ${dest_branch})
+check_dest_branch=$(git branch --list -r origin/${dest_branch})
 [ -z "$check_dest_branch" ] && echo "dest_branch: $dest_branch, doesn't exist." && exit 1
 
 # Congfigure git
@@ -44,11 +39,11 @@ echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
 cd $helm_src_temp_dir
 echo "after cd GITHUB_WORKSPACE=$GITHUB_WORKSPACE"
 helm package .
-mkdir $helm_dest_temp_dir/charts
-mv *.tgz $helm_dest_temp_dir/charts/
+mkdir $helm_dest_temp_dir
+mv *.tgz $helm_dest_temp_dir
 cd $helm_dest_temp_dir
 ls -l
-helm repo index ./charts --url $repo_url
+helm repo index . --url $repo_url
 ls -l
 
 # Copy the helm_dest_temp_dir folder content to the repo_dir
