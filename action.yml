@@ -9,9 +9,10 @@ inputs:
     description: 'The name of the branch used for GitHub Pages'
     required: true
     default: 'gh-pages'
-  git-token:
-    description: 'The GitHub token used to access the repository and push the commit'
+  dest-folder:
+    description: 'The destination folder on the chosen branch for index.yml file and helm .tgz packages'
     required: true
+    default: '.'
   repo-url:
     description: 'The repository URL'
     required: false
@@ -21,4 +22,5 @@ runs:
   args:
     - ${{ inputs.src-folder }}
     - ${{ inputs.dest-branch }}
+    - ${{ inputs.dest-folder }}
     - ${{ inputs.repo-url }}
