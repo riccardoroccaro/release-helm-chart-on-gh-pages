@@ -42,6 +42,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       # Create the helm package and publish it on the dest-branch
       - uses: riccardoroccaro/release-helm-chart-on-gh-pages@v1
