@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Set vars
+src_folder=$1
+dest_branch=$2
+git_token=$3
+
 # If repo_url has not been set it will be set to 'https://<owner>.github.com/<repo>'
 [ -z "$4" ] && repo_url="https://$(echo $GITHUB_REPOSITORY | cut -d '/' -f 1).github.com/$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" || repo_url=$4
 
